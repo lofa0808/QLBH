@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./assets/style/global.css" />
+    <link rel="stylesheet" href="./assets/style/login.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="login-top">
+        <h2 class="login-signin active">Đăng nhập</h2>
+        <h2 class="login-signup">Đăng Ký</h2>
+      </div>
+      <div class="wrapper">
+        <div id="form-signin" class="show">
+          <div class="form-group">
+            <label for="username">Tên đăng nhập</label>
+            <div class="input__wrapper">
+              <input type="text" placeholder="Ví dụ: admin" id="username" />
+            </div>
+            <span class="username-message"></span>
+          </div>
+          <div class="form-group">
+            <label for="password">Mật khẩu</label>
+            <div class="input__wrapper">
+              <input type="password" placeholder="Ví dụ: 123" id="password" class="password" />
+              <span><i class="fa-solid fa-eye eye--show hide"></i></span>
+              <span><i class="fa-solid fa-eye-slash eye--hide show"></i></span>
+            </div>
+          </div>
+          <div class="login-bottom">
+            <button class="btn btn--signin">Đăng nhập</button>
+          </div>
+        </div>
+        <div id="form-signup" class="show">
+          <div class="form-group">
+            <label for="su__username">Tên đăng nhập</label>
+            <div class="input__wrapper">
+              <input type="text" placeholder="Ví dụ: admin" id="su__username" />
+            </div>
+            <span class="form-message"></span>
+          </div>
+          <div class="form-group">
+            <label for="su__password">Mật khẩu</label>
+            <div class="input__wrapper">
+              <input type="password" placeholder="Ví dụ: 123" id="su__password" class="password" />
+              <span><i class="fa-solid fa-eye eye--show hide"></i></span>
+              <span><i class="fa-solid fa-eye-slash eye--hide show"></i></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="su__password--confirm">Xác nhận mật khẩu</label>
+            <div class="input__wrapper">
+              <input
+                type="password"
+                placeholder="Nhập lại mật khẩu"
+                id="su__password--confirm"
+                class="password"
+              />
+              <span><i class="fa-solid fa-eye eye--show hide"></i></span>
+              <span><i class="fa-solid fa-eye-slash eye--hide show"></i></span>
+            </div>
+          </div>
+          <div class="login-bottom">
+            <button class="btn btn--signup">Đăng Ký</button>
+          </div>
+        </div>
+      </div>
+      <div class="loader"></div>
+      <div class="overlay"></div>
+    </div>
+
+    <script src="./login.js"></script>
+  </body>
+</html>

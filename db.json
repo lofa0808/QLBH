@@ -1,0 +1,138 @@
+{
+  "accounts": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "1",
+      "position": "manager"
+    },
+    {
+      "id": 2,
+      "username": "user",
+      "password": "123",
+      "position": "employee"
+    }
+  ],
+  "items": [
+    {
+      "id": 1,
+      "maHang": "MH1",
+      "tenHang": "Áo thun tay ngắn banana",
+      "size": "L",
+      "soLuong": 10,
+      "gia": 120000
+    },
+    {
+      "id": 2,
+      "maHang": "MH2",
+      "tenHang": "Áo sơ mi đen tay ngắn",
+      "size": "L",
+      "soLuong": 23,
+      "gia": 160000
+    },
+    {
+      "id": 3,
+      "maHang": "MH3",
+      "tenHang": "Quần jean sọc trắng",
+      "size": 41,
+      "soLuong": 12,
+      "gia": 230000
+    },
+    {
+      "id": 4,
+      "maHang": "MH4",
+      "tenHang": "Quần tây đen",
+      "size": 40,
+      "soLuong": 56,
+      "gia": 300000
+    },
+    {
+      "id": 5,
+      "maHang": "MH5",
+      "tenHang": "Áo khoác Bomber",
+      "size": "XL",
+      "soLuong": 35,
+      "gia": 350000
+    },
+    {
+      "id": 6,
+      "maHang": "MH6",
+      "tenHang": "Áo sọc caro đen trắng",
+      "size": "M",
+      "soLuong": 10,
+      "gia": 250000
+    },
+    {
+      "id": 7,
+      "maHang": "MH7",
+      "tenHang": "Quần jogger kiểu...",
+      "size": "42",
+      "soLuong": 20,
+      "gia": 280000
+    },
+    {
+      "id": 8,
+      "maHang": "MH8",
+      "tenHang": "Quần ngắn thể thao",
+      "size": 39,
+      "soLuong": 77,
+      "gia": 150000
+    },
+    {
+      "maHang": "MH9",
+      "tenHang": "LofA",
+      "size": 40,
+      "soLuong": 1,
+      "gia": 88888888,
+      "id": 9
+    },
+    {
+      "maHang": "MH10",
+      "tenHang": "Áo sweater HIGHLIGHT",
+      "size": "L",
+      "soLuong": 25,
+      "gia": 200000,
+      "id": 10
+    },
+    {
+      "maHang": "MH11",
+      "tenHang": "Áo THUN TIME IS MONEY",
+      "size": "XL",
+      "soLuong": 13,
+      "gia": 100000,
+      "id": 11
+    },
+    {
+      "maHang": "MH12",
+      "tenHang": "Quần Jogger Delusive",
+      "size": 40,
+      "soLuong": 41,
+      "gia": 220000,
+      "id": 12
+    },
+    {
+      "maHang": "MH13",
+      "tenHang": "ÁO thun cô bé ngậm kẹo",
+      "size": "L",
+      "soLuong": 14,
+      "gia": 100000,
+      "id": 13
+    },
+    {
+      "maHang": "MH14",
+      "tenHang": "Quần kaki form suông trơn",
+      "size": 39,
+      "soLuong": 15,
+      "gia": 210000,
+      "id": 14
+    },
+    {
+      "maHang": "MH15",
+      "tenHang": "Quần Jean form viền đậm",
+      "size": 40,
+      "soLuong": 25,
+      "gia": 210000,
+      "id": 15
+    }
+  ]
+}
