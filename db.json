@@ -105,9 +105,9 @@
     {
       "maHang": "MH12",
       "tenHang": "Quần Jogger Delusive",
-      "size": 40,
-      "soLuong": 41,
-      "gia": 220000,
+      "size": "40",
+      "soLuong": "41",
+      "gia": "220000",
       "id": 12
     },
     {

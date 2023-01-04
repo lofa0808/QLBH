@@ -8,7 +8,7 @@ body {
 .app {
   margin: auto;
   width: 60vw;
-  height: 70vh;
+  height: fit-content;
   background-color: #fff;
   border-radius: 12px;
   padding: 20px;
@@ -69,6 +69,10 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
+}
+
+tr:hover > * {
+  background-color: #aaa !important;
 }
 
 th,
@@ -181,4 +185,15 @@ input {
 
 .features-btn button + button {
   margin-left: 16px;
+}
+
+.main__bottom-items {
+  height: 486px;
+  display: none;
+}
+
+span.add {
+  display: inline-block;
+  padding: 4px;
+  cursor: pointer;
 }

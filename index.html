@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="./assets/style/main.css" />
   </head>
   <body>
-    <h1 class="shop-name">HIGHLIGHT CLOTHES</h1>
+    <!-- <h1 class="shop-name">HIGHLIGHT CLOTHES</h1> -->
     <div class="app">
       <div class="top">
         <div class="btn--logout">
@@ -34,59 +34,90 @@
           <li class="menu-items">Bán hàng</li>
           <li class="menu-items">Thống kê báo cáo</li>
         </ul>
-        <div class="table-wrapper">
-          <table style="width: 100%">
-            <thead>
-              <tr>
-                <th>Mã hàng</th>
-                <th>Tên hàng</th>
-                <th>Size</th>
-                <th>Số lượng</th>
-                <th>Giá</th>
-                <th>Chức năng</th>
-              </tr>
-            </thead>
+        <div class="main__bottom">
+          <div class="main__bottom-items show">
+            <div class="table-wrapper">
+              <table style="width: 100%">
+                <thead>
+                  <tr>
+                    <th>Mã hàng</th>
+                    <th>Tên hàng</th>
+                    <th>Size</th>
+                    <th>Số lượng</th>
+                    <th>Giá</th>
+                    <th>Chức năng</th>
+                  </tr>
+                </thead>
 
-            <tbody class="list-items"></tbody>
-          </table>
-        </div>
+                <tbody class="list-items"></tbody>
+              </table>
+            </div>
 
-        <div class="features">
-          <div class="features-search">
-            <span>Tìm kiếm</span>
-            <input type="text" placeholder="Nhập từ cần tìm kiếm" class="input-search" />
+            <div class="features">
+              <div class="features-search">
+                <span>Tìm kiếm</span>
+                <input type="text" placeholder="Nhập từ cần tìm kiếm" class="input-search" />
+              </div>
+              <div class="features-insert">
+                <div class="label-group">
+                  <label for="">Mã hàng</label>
+                  <input type="text" style="width: 100px" placeholder="MH..." class="txt-mahang" />
+                </div>
+                <div class="label-group">
+                  <label for="">Tên hàng</label>
+                  <input
+                    type="text"
+                    style="width: 400px"
+                    placeholder="Nhập tên hàng"
+                    class="txt-tenhang"
+                  />
+                </div>
+                <div class="label-group">
+                  <label for="">Size</label>
+                  <input type="text" style="width: 100px" placeholder="....." class="txt-size" />
+                </div>
+                <div class="label-group">
+                  <label for="">Số lượng</label>
+                  <input type="text" style="width: 100px" placeholder="....." class="txt-soluong" />
+                </div>
+                <div class="label-group">
+                  <label for="">Giá</label>
+                  <input type="text" style="width: 150px" placeholder="...VND" class="txt-gia" />
+                </div>
+              </div>
+              <div class="features-btn">
+                <button class="btn--add">Thêm</button>
+                <button class="btn--update">Cập nhật</button>
+              </div>
+            </div>
           </div>
-          <div class="features-insert">
-            <div class="label-group">
-              <label for="">Mã hàng</label>
-              <input type="text" style="width: 100px" placeholder="MH..." class="txt-mahang" />
+
+          <div class="main__bottom-items">
+            <div class="table-wrapper">
+              <table style="width: 100%">
+                <thead>
+                  <tr>
+                    <th>Mã hàng</th>
+                    <th>Tên hàng</th>
+                    <th>Size</th>
+                    <th>Số lượng</th>
+                    <th>Giá</th>
+                    <th>Chức năng</th>
+                  </tr>
+                </thead>
+
+                <tbody class="list-items"></tbody>
+              </table>
             </div>
-            <div class="label-group">
-              <label for="">Tên hàng</label>
-              <input
-                type="text"
-                style="width: 400px"
-                placeholder="Nhập tên hàng"
-                class="txt-tenhang"
-              />
-            </div>
-            <div class="label-group">
-              <label for="">Size</label>
-              <input type="text" style="width: 100px" placeholder="....." class="txt-size" />
-            </div>
-            <div class="label-group">
-              <label for="">Số lượng</label>
-              <input type="text" style="width: 100px" placeholder="....." class="txt-soluong" />
-            </div>
-            <div class="label-group">
-              <label for="">Giá</label>
-              <input type="text" style="width: 150px" placeholder="...VND" class="txt-gia" />
+
+            <div class="features">
+              <div class="features-search">
+                <span>Tìm kiếm</span>
+                <input type="text" placeholder="Nhập từ cần tìm kiếm" class="input-search" />
+              </div>
             </div>
           </div>
-          <div class="features-btn">
-            <button class="btn--add">Thêm</button>
-            <button class="btn--update">Cập nhật</button>
-          </div>
+          <div class="main__bottom-items"></div>
         </div>
       </div>
     </div>

@@ -10,6 +10,8 @@ function app() {
   const inputSearch = document.querySelector('.input-search');
   const btnAdd = document.querySelector('.btn--add');
   const btnUpdate = document.querySelector('.btn--update');
+  const menuItems = document.querySelectorAll('.menu-items');
+  const mainBottomItems = document.querySelectorAll('.main__bottom-items');
   let txtMaHang = document.querySelector('.txt-mahang');
   let txtTenHang = document.querySelector('.txt-tenhang');
   let txtSize = document.querySelector('.txt-size');
@@ -20,31 +22,52 @@ function app() {
   const months = date.getMonth() + 1;
   const years = date.getFullYear();
 
-  table.onclick = function (e) {
-    function handleClickEdit(itemId) {
-      fetch(itemsApi)
-        .then((res) => res.json())
-        .then((items) => {
-          items.forEach((item) => {
-            if (item.id == itemId) {
-              const itemEdit = {
-                maHang: item.maHang,
-                tenHang: item.tenHang,
-                size: item.size,
-                soLuong: item.soLuong,
-                gia: item.gia,
-              };
-              localStorage.setItem('itemEdit', JSON.stringify(itemEdit));
-            }
-          });
+  function handleClickEdit(itemId) {
+    fetch(itemsApi)
+      .then((res) => res.json())
+      .then((items) => {
+        for (let i = 0; i < items.length; i++) {
+          const item = items[i];
+          if (item.id == itemId) {
+            txtMaHang.value = item.maHang;
+            txtTenHang.value = item.tenHang;
+            txtSize.value = item.size;
+            txtSoLuong.value = item.soLuong;
+            txtGia.value = item.gia;
+            return;
+          }
+        }
+      });
+  }
+
+  menuItems.forEach((item, i) => {
+    item.onclick = function (e) {
+      document.querySelector('.menu-items.active').classList.remove('active');
+      e.target.classList.add('active');
+      const mainBottomItemShow = document.querySelector('.main__bottom-items.show');
+      if (mainBottomItemShow) {
+        mainBottomItemShow.classList.remove('show');
+      }
+      mainBottomItems[i].classList.add('show');
+      if (i == 1) {
+        getItems((items) => {
+          renderItems(items, undefined, 'ban', i);
         });
-      const itemEdit = JSON.parse(localStorage.getItem('itemEdit'));
-      txtMaHang.value = itemEdit.maHang;
-      txtTenHang.value = itemEdit.tenHang;
-      txtSize.value = itemEdit.size;
-      txtSoLuong.value = itemEdit.soLuong;
-      txtGia.value = itemEdit.gia;
-    }
+        const inputSearch = document.querySelectorAll('.input-search')[1];
+        let timer;
+        inputSearch.onkeyup = function () {
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            getItems((items) => {
+              renderItems(items, inputSearch.value.toLowerCase(), 'ban', i);
+            });
+          }, 800);
+        };
+      }
+    };
+  });
+
+  table.onclick = function (e) {
     let subDot;
     if (
       e.target.closest('.dot') &&
@@ -55,17 +78,20 @@ function app() {
     } else if (e.target.closest('.dot > i')) {
       subDot = e.target.nextElementSibling;
     }
-    subDot.classList.toggle('show');
-    subDot.onclick = (event) => {
-      if (event.target.closest('.btn--edit')) {
-        const itemId = event.target.dataset.editid;
-        handleClickEdit(itemId);
-        subDot.classList.remove('show');
-      } else {
-        const itemId = event.target.dataset.deleteid;
-        hanleDeleteItem(itemId);
-      }
-    };
+    if (subDot) {
+      subDot.classList.toggle('show');
+      subDot.onclick = (event) => {
+        if (event.target.closest('.btn--edit')) {
+          const itemId = event.target.dataset.editid;
+          localStorage.setItem('itemid', itemId);
+          handleClickEdit(itemId);
+          subDot.classList.remove('show');
+        } else {
+          const itemId = event.target.dataset.deleteid;
+          DeleteItem(itemId);
+        }
+      };
+    }
   };
 
   btnAdd.onclick = function () {
@@ -89,52 +115,87 @@ function app() {
       return;
     }
 
-    const data = fetch(itemsApi)
+    fetch(itemsApi)
       .then((res) => res.json())
       .then((items) => {
-        // for (let i = 0; i < items.length; i++) {
-        //   const item = items[i];
-        //   if (item.maHang.toLowerCase() === maHang.toLowerCase()) {
-        //     localStorage.setItem('check', 1);
-        //     alert('Mã hàng không được trùng nhau.');
-        //     break;
-        //   }
-        // }
-        return items;
-      });
-
-    let check = false;
-    data.then((items) => {
-      for (let i = 0; i < items.length; i++) {
-        const item = items[i];
-        if (item.maHang.toLowerCase() === maHang.toLowerCase()) {
-          check = true;
-          alert('Mã hàng không được trùng nhau.');
-          break;
+        for (let i = 0; i < items.length; i++) {
+          const item = items[i];
+          if (item.maHang.toLowerCase() === maHang.toLowerCase()) {
+            return true;
+          }
         }
-      }
-    });
+      })
+      .then((check) => {
+        if (check) {
+          alert('Mã hàng không được trùng!');
+        } else {
+          const formData = {
+            maHang: maHang.toUpperCase(),
+            tenHang: tenHang,
+            size: size.toUpperCase(),
+            soLuong: Number.parseInt(soLuong),
+            gia: Number.parseFloat(gia),
+          };
 
-    console.log(check);
-
-    const formData = {
-      maHang: maHang.toUpperCase(),
-      tenHang: tenHang,
-      size: size.toUpperCase(),
-      soLuong: Number.parseInt(soLuong),
-      gia: Number.parseFloat(gia),
-    };
-
-    // const check = JSON.parse(localStorage.getItem('check'));
-
-    // if (!check) {
-    //   createItem(formData, function () {
-    //     getItems(renderItems);
-    //   });
-    // }
+          createItem(formData, function () {
+            getItems(renderItems);
+          });
+        }
+      });
   };
 
-  // btnUpdate.onclick = function () {};
+  btnUpdate.onclick = function () {
+    const maHang = txtMaHang.value;
+    const tenHang = txtTenHang.value;
+    const size = txtSize.value;
+    const soLuong = txtSoLuong.value;
+    const gia = txtGia.value;
+    if (maHang === '' || tenHang == '' || size == '' || soLuong == '' || gia == '') {
+      alert('Không được để trống');
+      return;
+    }
+    const soLuongInt = Number.parseInt(soLuong);
+    const giaInt = Number.parseInt(gia);
+    if (isNaN(soLuongInt)) {
+      alert('Vui lòng nhập chữ số cho mục SỐ LƯỢNG.');
+      return;
+    }
+    if (isNaN(giaInt)) {
+      alert('Vui lòng nhập chữ số cho mục Gia.');
+      return;
+    }
+
+    fetch(itemsApi)
+      .then((res) => res.json())
+      .then((items) => {
+        const itemId = JSON.parse(localStorage.getItem('itemid'));
+        for (let i = 0; i < items.length; i++) {
+          const item = items[i];
+          if (item.maHang.toLowerCase() === maHang.toLowerCase() && item.id !== itemId) {
+            return true;
+          }
+        }
+      })
+      .then((check = false) => {
+        if (check) {
+          alert('Mã hàng không được trùng!');
+        } else {
+          const itemId = JSON.parse(localStorage.getItem('itemid'));
+          handleUpdateItem(itemId);
+        }
+      });
+  };
+
+  function handleUpdateItem(id) {
+    const newItem = {
+      maHang: txtMaHang.value,
+      tenHang: txtTenHang.value,
+      size: txtSize.value,
+      soLuong: txtSoLuong.value,
+      gia: txtGia.value,
+    };
+    UpdateItem(id, newItem);
+  }
 
   let timer;
   inputSearch.onkeyup = function () {
@@ -156,7 +217,6 @@ function app() {
   // handle click btn logout
   btnLogout.onclick = function () {
     const isLogout = confirm('Bạn có muốn đăng xuất không?');
-
     if (isLogout) window.location = 'http://127.0.0.1:5500/Project/QLBH/login.html';
   };
 
@@ -176,7 +236,7 @@ function createItem(data, callback) {
     .then(callback);
 }
 
-function hanleDeleteItem(id) {
+function DeleteItem(id) {
   var options = {
     method: 'DELETE',
     headers: {
@@ -184,7 +244,22 @@ function hanleDeleteItem(id) {
     },
   };
   fetch(itemsApi + '/' + id, options)
-    .then((response) => response.json())
+    .then((res) => res.json())
+    .then(function () {
+      getItems(renderItems);
+    });
+}
+
+function UpdateItem(id, data) {
+  var options = {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  };
+  fetch(itemsApi + '/' + id, options)
+    .then((res) => res.json())
     .then(function () {
       getItems(renderItems);
     });
@@ -196,8 +271,8 @@ function getItems(callback) {
     .then(callback);
 }
 
-function renderItems(items, inputValue) {
-  const listItemsBlock = document.querySelector('.list-items');
+function renderItems(items, inputValue, type = 'kho', index = 0) {
+  const listItemsBlock = document.querySelectorAll('.list-items')[index];
   const rowTable = (item) => {
     return `
       <tr>
@@ -207,13 +282,20 @@ function renderItems(items, inputValue) {
           <td>${item.soLuong}</td>
           <td>${item.gia}</td>
           <td>
-            <span class="dot">
-              <i class="fa-solid fa-ellipsis-vertical"></i>
-              <div class="sub-dot">
-                <span data-editid="${item.id}" class="btn--edit">Chỉnh sửa</span>
-                <span data-deleteid="${item.id}" class="btn--delete">Xoá</span>
-              </div>
-            </span>
+          ${
+            type.includes('kho') == true
+              ? `<span class="dot">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                  <div class="sub-dot">
+                    <span data-editid="${item.id}" class="btn--edit">Chỉnh sửa</span>
+                    <span data-deleteid="${item.id}" class="btn--delete">Xoá</span>
+                  </div>
+                </span>`
+              : `<span class="add" data-id="${item.id}">
+                  <i class="fa-solid fa-plus"></i>
+                </span>`
+          }
+            
           </td>
       </tr>
     `;
